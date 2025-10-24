@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyWise Germany | Student Visa & Scholarship Consulting</title>
+    
+    <!-- START: MOBILE OPTIMIZATION & MANIFEST -->
+    <!-- Ensures proper mobile scaling (already present, but critical) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Apple/iOS Web App Settings (makes it look native on home screen) -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="https://placehold.co/180x180/1e3a8a/FFC800?text=SW">
+    <!-- Standard Web App Manifest (for Android/Chrome) -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+    <!-- END: MOBILE OPTIMIZATION & MANIFEST -->
+    
+    <!-- START: GOOGLE ANALYTICS 4 (GA4) TRACKING CODE -->
+    <!-- You MUST replace 'YOUR_MEASUREMENT_ID_HERE' with your actual Measurement ID after deployment -->
+    <script async src="https://www.googletletagmanager.com/gtag/js?id=YOUR_MEASUREMENT_ID_HERE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'YOUR_MEASUREMENT_ID_HERE');
+    </script>
+    <!-- END: GOOGLE ANALYTICS 4 (GA4) TRACKING CODE -->
+    
+    <!-- Load Tailwind CSS from CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter Font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom CSS to apply Inter font globally */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+        }
+        /* Primary Background Color (Used for background of Why Us/Form Button, now Black) */
+        .brand-blue {
+            background-color: #000000; 
+        }
+        /* Primary Accent Color (Used for Headers/Text, now Red) */
+        .text-brand-blue {
+            color: #dc2626; 
+        }
+        /* Primary Border Color (Used for accents, now Red) */
+        .border-brand-blue {
+            border-color: #dc2626; 
+        }
+        /* Official WhatsApp Brand Green */
+        .whatsapp-green {
+            background-color: #25D366;
+        }
+        .hover\:bg-whatsapp-dark:hover {
+            background-color: #1DA851; /* A slightly darker green for hover effect */
+        }
+
+        /* NEW: GERMAN FLAG GRADIENT FOR HERO & CONTACT SECTIONS */
+        .german-flag-gradient {
+            background: linear-gradient(180deg, #000000 0%, #DC0530 50%, #FFC800 100%); /* Black, Red, Gold */
+        }
+        
+        /* ------------------------------------------- */
+        /* NEW: Hidden Admin Dashboard Overlay Styles  */
+        /* ------------------------------------------- */
+        #admin-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* Darker semi-transparent background */
+            z-index: 50; /* Ensure it's above all content */
+            display: none; /* HIDDEN BY DEFAULT */
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        #admin-dashboard {
+            max-width: 800px;
+            width: 95%;
+            max-height: 90vh; /* Limit height */
+            overflow-y: auto; /* Allow scrolling within the dashboard */
+            background: #f8fafc;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            padding: 24px;
+        }
+        
+        /* ------------------------------------------- */
+        /* Print Styles (Crucial for clean PDF)        */
+        /* ------------------------------------------- */
+        @media print {
+            /* Hide non-essential UI elements during printing */
+            #main-header, main, #main-footer, .fixed, #admin-overlay {
+                display: none !important;
+            }
+            
+            /* Ensure ONLY the inner dashboard content is visible and takes up the page */
+            #admin-dashboard-content {
+                display: block !important; 
+                margin: 0 auto;
+                padding: 20px;
+                background-color: white !important;
+            }
+            
+            /* Add some spacing for better print readability */
+            #inquiries-list div {
+                border: 1px solid #ddd;
+                padding: 10px;
+                margin-bottom: 15px;
+                page-break-inside: avoid; /* Prevents card splitting across pages */
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased">
+
+    <!-- Header & Navigation -->
+    <header id="main-header" class="bg-white shadow-md sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo: Graduation Cap (Yellow) and StudyWise Text (Red) -->
+            <!-- SECRET TRIGGER: Triple-click the logo (#site-logo) to open the Admin Dashboard -->
+            <a href="#" id="site-logo" class="flex items-center space-x-2 cursor-pointer">
+                <!-- Graduation Cap Icon SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-10 text-yellow-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.914l-.32-1.128A47.874 47.874 0 0 0 16.74 13.9a48.455 48.455 0 0 0 1.134.129 60.438 60.438 0 0 0 1.134-.129A48.455 48.455 0 0 0 12 7.086l.32 1.128A47.874 47.874 0 0 0 7.26 13.9a60.438 60.438 0 0 0-.491-6.347Z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V8.25A2.25 2.25 0 0 0 13.5 6H8.25A2.25 2.25 0 0 0 6 8.25v2.25" />
+                </svg>
+                <!-- Site Name Text -->
+                <span class="text-2xl font-bold text-red-600">StudyWise</span>
+            </a>
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#services" class="text-gray-600 hover:text-red-600 transition duration-150 font-medium">Services</a>
+                <a href="#why-us" class="text-gray-600 hover:text-red-600 transition duration-150 font-medium">Why Us?</a>
+                <a href="#advantages" class="text-gray-600 hover:text-red-600 transition duration-150 font-medium">Advantages</a>
+                <a href="#founder" class="text-gray-600 hover:text-red-600 transition duration-150 font-medium">Founder</a>
+                <a href="#testimonials" class="text-gray-600 hover:text-red-600 transition duration-150 font-medium">Testimonials</a>
+                <!-- CTA Button -->
+                <a href="#contact" class="px-4 py-2 bg-red-600 text-white font-bold rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300">Free Consultation</a>
+            </nav>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition duration-150" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-3 space-y-1 bg-white border-t">
+            <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Services</a>
+            <a href="#why-us" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Why Us?</a>
+            <a href="#advantages" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Advantages</a>
+            <a href="#founder" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Founder</a>
+            <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-50">Testimonials</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-white brand-blue hover:bg-red-600 text-center">Free Consultation</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section: Main Call-to-Action -->
+        <section class="german-flag-gradient text-white py-16 sm:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4 leading-tight">
+                    Your Journey to Your Dream Degree in Germany.
+                </h1>
+                <p class="text-xl sm:text-2xl text-red-100 mb-8 max-w-3xl mx-auto">
+                    Expert Consulting for Student Visas, Scholarships, and University Admission. We make the process simple.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contact" class="px-8 py-3 bg-red-600 text-white font-bold text-lg rounded-xl shadow-2xl hover:bg-yellow-400 transition duration-300 transform hover:scale-105">
+                        Get a Free Consultation Now
+                    </a>
+                    <a href="#services" class="px-8 py-3 border border-white text-white font-medium text-lg rounded-xl hover:bg-white hover:text-red-600 transition duration-300 transform hover:scale-105">
+                        Discover Our Services
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section: Key Offerings -->
+        <section id="services" class="py-16 sm:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-red-600 mb-4">Our Expert Services</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Everything you need for a successful start in Germany—from a single source.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Service 1: Visa Application -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-red-600">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-red-600 mr-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5v1.5a3 3 0 0 1-3 3H6.75a3 3 0 0 1-3-3v-1.5m12 0a3 3 0 0 0-3-3H6.75a3 3 0 0 0-3 3m12 0h2.25m-2.25 0a3 3 0 0 1 3 3v.75m-3-3v-6a3 3 0 0 0-3-3H6.75a3 3 0 0 0-3 3v6m1.5 6.75h.008v.008H5.25v-.008Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                            </svg>
+                            <h3 class="text-xl font-bold text-red-600">Visa Application & Authorities</h3>
+                        </div>
+                        <p class="text-gray-600">We guide you through the complex process of applying for the German student visa (blocked account, health insurance, document checks) for a smooth procedure.</p>
+                    </div>
+
+                    <!-- Service 2: University Admission -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-yellow-500">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-yellow-500 mr-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.914l-.32-1.128A47.874 47.874 0 0 0 16.74 13.9a48.455 48.455 0 0 0 1.134.129 60.438 60.438 0 0 0 1.134-.129A48.455 48.455 0 0 0 12 7.086l.32 1.128A47.874 47.874 0 0 0 7.26 13.9a60.438 60.438 0 0 0-.491-6.347Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V8.25A2.25 2.25 0 0 0 13.5 6H8.25A2.25 2.25 0 0 0 6 8.25v2.25" />
+                            </svg>
+                            <h3 class="text-xl font-bold">University Admission</h3>
+                        </div>
+                        <p class="text-gray-600">Consultation on selecting the right university and course of study, as well as checking and compiling all necessary application documents.</p>
+                    </div>
+
+                    <!-- Service 3: Scholarship Search -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-lg hover:shadow-xl transition duration-300 border-t-4 border-red-600">
+                        <div class="flex items-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-red-600 mr-3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25H10.5m-10.5-5.25h2.25m5.25 0H14m-12.75 0h12.75M3 18v-1.5M3 6.75V4.5A2.25 2.25 0 0 1 5.25 2.25h13.5A2.25 2.25 0 0 1 21 4.5v13.5A2.25 2.25 0 0 1 18.75 21H5.25A2.25 2.25 0 0 1 3 18Z" />
+                            </svg>
+                            <h3 class="text-xl font-bold text-red-600">Scholarship & Financial Planning</h3>
+                        </div>
+                        <p class="text-gray-600">We help you find suitable German scholarships and optimize your applications to maximize your chances of financial support.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section: Core Consultancy Value -->
+        <section id="why-us" class="py-16 sm:py-24 bg-black text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-yellow-500 mb-4">Why Choose StudyWise Germany?</h2>
+                    <p class="text-lg text-red-100 max-w-2xl mx-auto">Your success in Germany is our mission.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1: Focus -->
+                    <div class="text-center p-6 bg-blue-900 rounded-xl shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-yellow-500 mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3.75-16.5a1.5 1.5 0 0 0-1.5-1.5H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V12.75c0-.621-.504-1.125-1.125-1.125H15.75c-.621 0-1.125.504-1.125 1.125V18a1.5 1.5 0 0 1-1.5 1.5H9M6 4.5h3.75" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1">100% Germany Focus</h4>
+                        <p class="text-sm text-red-200">Specialized in German university and visa regulations only.</p>
+                    </div>
+                    <!-- Feature 2: Success Rate -->
+                    <div class="text-center p-6 bg-blue-900 rounded-xl shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-yellow-500 mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h10.5L13.5 21l3.375-3.375a7.5 7.5 0 0 0-6.007-12.83" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1">Proven Success Record</h4>
+                        <p class="text-sm text-red-200">A track record of placing students in Germany's top academic institutions.</p>
+                    </div>
+                    <!-- Feature 3: Personalized Support -->
+                    <div class="text-center p-6 bg-blue-900 rounded-xl shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-yellow-500 mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3v2h-3V9ZM9 15h3v2h-3v-2ZM9 15h3v2h-3v-2ZM12 3v3m0 12v3m9-9h-3m-15 0h-3m3 6a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1">Personalized Support</h4>
+                        <p class="text-sm text-red-200">Individual 1:1 assistance from visa prep to university enrollment.</p>
+                    </div>
+                    <!-- Feature 4: Transparency -->
+                    <div class="text-center p-6 bg-blue-900 rounded-xl shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-yellow-500 mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75v3m.75-3l.97.97m5.54-5.54L15.68 5.79m-1.47 11.13c.895.703 2.152.924 3.25.924h.5A2.25 2.25 0 0 0 22.5 16.5V7.5a2.25 2.25 0 0 0-2.25-2.25H18c-.375 0-.745-.118-1.077-.336M12 9h.008v.008H12V9Zm0 3h.008v.008H12v-.008Zm0 3h.008v.008H12V15Z" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1">Complete Transparency</h4>
+                        <p class="text-sm text-red-200">Clear, upfront pricing with no hidden fees or surprise charges.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Residency & Career Advantages (German Flag Colors) -->
+        <section id="advantages" class="py-16 sm:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-red-600 mb-4">Your Ultimate Advantage in Germany</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">The fastest path to residency and a career in the EU.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature 1: Post Study Work Visa -->
+                    <div class="text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-black mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25m0 0l-3.375 3.375M12 12.75l3.375 3.375M12 12.75V3" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1 text-black">Post Study Work Visa</h4>
+                        <p class="text-sm text-gray-600">Guaranteed job search visa leading to secure EU Residency in the shortest time.</p>
+                    </div>
+                    <!-- Feature 2: Shortest Residency -->
+                    <div class="text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-red-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-red-600 mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1 text-red-600">Fast-Track to EU Residency</h4>
+                        <p class="text-sm text-gray-600">Guidance on the shortest legal pathway to permanent EU residency.</p>
+                    </div>
+                    <!-- Feature 3: English Courses -->
+                    <div class="text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-yellow-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-yellow-500 mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-10.5L21 21m-9-3h.008v.008H12V18Zm0-3h.008v.008H12V15Z" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1 text-yellow-500">English Language Courses</h4>
+                        <p class="text-sm text-gray-600">Access to German university courses offered entirely in the English language.</p>
+                    </div>
+                    <!-- Feature 4: Part-Time Jobs -->
+                    <div class="text-center p-6 bg-white rounded-xl shadow-lg border-t-4 border-black">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10 text-black mx-auto mb-3">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6V3.75A1.125 1.125 0 0 0 14.625 2.5h-5.25A1.125 1.125 0 0 0 8.25 3.75V6m1.5 6.75h.008v.008H9.75v-.008Zm.375 0h.008v.008H10.125v-.008Zm1.125 0h.008v.008H11.25v-.008Zm.375 0h.008v.008H11.625v-.008Zm1.125 0h.008v.008H12.75v-.008Zm.375 0h.008v.008H13.125v-.008Zm1.125 0h.008v.008H14.25v-.008Zm.375 0h.008v.008H14.625v-.008Zm1.125 0h.008v.008H15.75v-.008ZM15.75 6h-7.5c-1.125 0-2.25.5-2.25 2.25v6.75c0 1.125.5 2.25 2.25 2.25h7.5c1.125 0 2.25-.5 2.25-2.25V8.25c0-1.125-.5-2.25-2.25-2.25Z" />
+                        </svg>
+                        <h4 class="font-bold text-lg mb-1 text-black">Part-Time Work Allowed</h4>
+                        <p class="text-sm text-gray-600">Permission for students to work part-time during their studies for income.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meet the Founder Section (Dynamically loaded from Firestore) -->
+        <section id="founder" class="py-16 sm:py-24 bg-gray-100">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-red-600 mb-4">Meet the Founder</h2>
+                    <p class="text-lg text-gray-600">Guidance from an expert who successfully navigated the German system.</p>
+                </div>
+                
+                <!-- Founder Profile Container: Content is inserted by JavaScript (renderFounderProfile) -->
+                <div id="founder-profile" class="bg-white p-8 rounded-xl shadow-2xl flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                    <!-- Profile content will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 sm:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-red-600 mb-4">What Our Students Say</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Real success stories from satisfied students.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-xl border-l-4 border-yellow-500">
+                        <p class="italic text-gray-700 mb-4">"Without StudyWise, I never would have managed the visa process so quickly and flawlessly. The support was first-class—I am now studying at my dream university in Munich!"</p>
+                        <p class="font-bold text-red-600">— Talha Baseer, Engineering</p>
+                        <p class="text-sm text-gray-500">Munich, Germany</p>
+                    </div>
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-xl border-l-4 border-yellow-500">
+                        <p class="italic text-gray-700 mb-4">"The help with the scholarship search was worth its weight in gold. I received a partial scholarship that secured my studies in Berlin financially. Highly recommended!"</p>
+                        <p class="font-bold text-red-600">— Shahzaib Nawab, Computer Science</p>
+                        <p class="text-sm text-gray-500">Berlin, Germany</p>
+                    </div>
+                    <!-- Testimonial 3 -->
+                    <div class="bg-50 p-6 rounded-xl shadow-xl border-l-4 border-yellow-500">
+                        <p class="italic text-gray-700 mb-4">"From course selection to registration with the local authorities in Stuttgart, StudyWise managed every step. Five stars for the excellent service!"</p>
+                        <p class="font-bold text-red-600">— Touseef Nawab, Business Administration</p>
+                        <p class="text-sm text-gray-500">Stuttgart, Germany</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section: Lead Capture Form -->
+        <section id="contact" class="py-16 sm:py-24 german-flag-gradient text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-yellow-500 mb-4">Your Free Initial Consultation</h2>
+                    <p class="text-xl text-red-100 mb-8">Start your journey to Germany today. Fill out the form, and we will get back to you within 24 hours.</p>
+                </div>
+
+                <div class="bg-white p-8 sm:p-10 rounded-xl shadow-2xl">
+                    <form id="contact-form" class="space-y-6">
+                        <!-- NEW: Qualification Dropdown -->
+                        <div>
+                            <label for="qualification" class="block text-sm font-medium text-gray-700">Highest Qualification Level</label>
+                            <select id="qualification" name="qualification" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 text-gray-900">
+                                <option value="" disabled selected>Select Qualification</option>
+                                <option value="FSC/A-Levels">FSC / A-Levels</option>
+                                <option value="Bachelors (4 Year)">Bachelor's Degree (4 Year)</option>
+                                <option value="Masters">Master's Degree</option>
+                                <option value="Other">Other / Currently Studying</option>
+                            </select>
+                        </div>
+                        <!-- Name Field -->
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 text-gray-900" placeholder="Wali Khan">
+                        </div>
+                        <!-- Email Field -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                            <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 text-gray-900" placeholder="wali.khan@email.com">
+                        </div>
+                        <!-- Phone Field (Not Optional) -->
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 text-gray-900" placeholder="+92 333 1234567">
+                        </div>
+                        <!-- Interest Dropdown -->
+                        <div>
+                            <label for="interest" class="block text-sm font-medium text-gray-700">Interested In</label>
+                            <select id="interest" name="interest" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 text-gray-900">
+                                <option value="" disabled selected>Please select</option>
+                                <option value="Visa Consulting Only">Visa Consulting Only</option>
+                                <option value="University Admission Only">University Admission Only</option>
+                                <option value="Scholarship Search & Funding">Scholarship Search & Funding</option>
+                                <option value="Complete Service Package">Complete Service Package</option>
+                            </select>
+                        </div>
+                        <!-- Message Field -->
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-700">Your Message / Questions</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-600 focus:border-red-600 text-gray-900" placeholder="Tell us more about your plans..."></textarea>
+                        </div>
+                        <!-- Submission Button -->
+                        <button type="submit" id="submit-button" class="w-full bg-red-600 text-white py-3 px-4 border border-transparent rounded-xl shadow-lg font-bold hover:bg-yellow-400 transition duration-300">
+                            Request Consultation
+                        </button>
+                        <!-- Submission Status Messages -->
+                        <p id="submission-success" class="text-center text-sm text-green-600 hidden">Your request has been successfully sent and stored!</p>
+                        <p id="submission-error" class="text-center text-sm text-red-600 hidden">Error submitting request. Please try again or contact us directly.</p>
+                    </form>
+                </div>
+
+                <!-- Contact Information & WhatsApp Links -->
+                <div class="mt-12 text-center text-red-100">
+                    <p class="font-bold text-xl mb-4">Direct Contact:</p>
+                    <p>Email: <a href="mailto:info@studywisegermany.de" class="text-red-600 hover:text-yellow-400">info@studywisegermany.de</a></p>
+                    
+                    <!-- Direct WhatsApp Chat Button -->
+                    <a href="https://wa.me/923325687118" target="_blank" class="inline-flex items-center mt-4 px-6 py-3 whatsapp-green text-white font-bold rounded-xl shadow-lg hover:bg-whatsapp-dark transition duration-300 transform hover:scale-105">
+                        <!-- WhatsApp Icon (White icon is the standard logo) -->
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" class="w-5 h-5 mr-2">
+                             <path d="M12.04 2C6.58 2 2.14 6.43 2.14 11.88C2.14 13.66 2.65 15.35 3.56 16.81L2.09 22.02L7.47 20.57C8.91 21.37 10.46 21.78 12.04 21.78C17.5 21.78 21.94 17.35 21.94 11.88C21.94 6.43 17.5 2 12.04 2ZM17.35 15.37C17.15 15.8 16.03 16.32 15.15 16.5C14.32 16.69 13.51 16.71 12.75 16.53C10.3 16.03 8.32 13.88 7.9 13.34C7.74 13.14 6.38 11.23 6.38 9.22C6.38 7.37 7.74 6.13 8.24 5.92C8.63 5.76 9.07 5.73 9.49 5.81C9.69 5.85 9.87 5.79 10.04 6.22L10.5 7.42C10.64 7.74 10.74 7.76 10.87 7.84C11.16 8.01 11.45 8.26 11.69 8.5C11.96 8.78 12.16 9.03 12.35 9.29C12.44 9.42 12.55 9.58 12.63 9.77L12.9 10.15C13.25 10.63 13.6 11.13 13.91 11.58C14.28 12.08 14.54 12.41 14.78 12.65C14.97 12.83 15.16 13.06 15.34 13.24C15.55 13.43 15.75 13.62 15.93 13.79C16.14 13.99 16.29 14.24 16.39 14.39C16.54 14.61 16.63 14.76 16.75 14.93C16.92 15.18 17.1 15.34 17.35 15.37Z"/>
+                        </svg>
+                        Chat on WhatsApp (+92 3325687118)
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- FLOATING WHATSAPP BUTTON (Stays visible on scroll) -->
+    <a href="https://wa.me/923325687118" target="_blank" class="fixed bottom-5 right-5 z-20 whatsapp-green p-3 rounded-full shadow-2xl hover:bg-whatsapp-dark transition duration-300">
+        <!-- WhatsApp Icon (White icon is the standard logo) -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" class="w-8 h-8">
+            <path d="M12.04 2C6.58 2 2.14 6.43 2.14 11.88C2.14 13.66 2.65 15.35 3.56 16.81L2.09 22.02L7.47 20.57C8.91 21.37 10.46 21.78 12.04 21.78C17.5 21.78 21.94 17.35 21.94 11.88C21.94 6.43 17.5 2 12.04 2ZM17.35 15.37C17.15 15.8 16.03 16.32 15.15 16.5C14.32 16.69 13.51 16.71 12.75 16.53C10.3 16.03 8.32 13.88 7.9 13.34C7.74 13.14 6.38 11.23 6.38 9.22C6.38 7.37 7.74 6.13 8.24 5.92C8.63 5.76 9.07 5.73 9.49 5.81C9.69 5.85 9.87 5.79 10.04 6.22L10.5 7.42C10.64 7.74 10.74 7.76 10.87 7.84C11.16 8.01 11.45 8.26 11.69 8.5C11.96 8.78 12.16 9.03 12.35 9.29C12.44 9.42 12.55 9.58 12.63 9.77L12.9 10.15C13.25 10.63 13.6 11.13 13.91 11.58C14.28 12.08 14.54 12.41 14.78 12.65C14.97 12.83 15.16 13.06 15.34 13.24C15.55 13.43 15.75 13.62 15.93 13.79C16.14 13.99 16.29 14.24 16.39 14.39C16.54 14.61 16.63 14.76 16.75 14.93C16.92 15.18 17.1 15.34 17.35 15.37Z"/>
+        </svg>
+    </a>
+
+    <!-- Footer -->
+    <footer id="main-footer" class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
+            <p class="text-sm mb-4 sm:mb-0">&copy; 2024 StudyWise Germany. All Rights Reserved.</p>
+            <div class="flex justify-center sm:justify-end space-x-6 text-sm">
+                <!-- Legal Links (Need to be replaced by actual documents) -->
+                <a href="#" class="hover:text-yellow-500 transition duration-150">Legal Notice</a>
+                <a href="#" class="hover:text-yellow-500 transition duration-150">Privacy Policy</a>
+                <a href="#" class="hover:text-yellow-500 transition duration-150">Terms & Conditions</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ADMIN DASHBOARD OVERLAY (Hidden from view by default) -->
+    <div id="admin-overlay" class="hidden">
+        <div id="admin-dashboard">
+            <div id="admin-dashboard-content">
+                <h2 class="text-2xl font-extrabold text-gray-800 mb-6 flex justify-between items-center">
+                    Admin Dashboard (Shared Access)
+                    <div class="space-x-4">
+                        <button id="close-dashboard" class="px-3 py-1 bg-red-500 text-white font-bold rounded-lg shadow-md hover:bg-red-600 transition duration-300 text-sm">
+                            Close
+                        </button>
+                    </div>
+                </h2>
+
+                <!-- NEW: Admin Login Area -->
+                <div id="admin-login-area" class="max-w-md mx-auto p-6 bg-white rounded-xl shadow-lg border-l-4 border-brand-blue mb-6">
+                    <p class="text-sm font-medium text-gray-700 mb-4">Enter Passcode for Shared Access</p>
+                    <div class="flex space-x-2">
+                        <input type="password" id="admin-passcode" placeholder="Enter secret code" class="flex-grow px-4 py-2 border border-gray-300 rounded-lg text-gray-900">
+                        <button id="access-button" class="px-4 py-2 brand-blue text-white font-bold rounded-lg hover:bg-red-600 transition duration-300">
+                            Access
+                        </button>
+                    </div>
+                    <p id="passcode-error" class="text-sm text-red-600 mt-2 hidden">Incorrect passcode. Access denied.</p>
+                </div>
+                
+                <!-- Dashboard Content Area (Container for Tabs) -->
+                <div id="dashboard-content-area" class="hidden">
+                    
+                    <!-- ADMIN TABS/NAVIGATION -->
+                    <div class="flex mb-6 border-b border-gray-200">
+                        <button id="tab-inquiries" onclick="switchAdminView('inquiries')" class="px-4 py-2 text-sm font-semibold text-red-600 border-b-2 border-red-600 bg-white rounded-t-lg transition duration-150">
+                            Student Inquiries
+                        </button>
+                        <button id="tab-founder" onclick="switchAdminView('founder')" class="px-4 py-2 text-sm font-semibold text-gray-600 hover:text-red-600 hover:border-red-600 transition duration-150 ml-2">
+                            Edit Founder Profile
+                        </button>
+                    </div>
+
+                    <!-- Founder Profile Edit and View Area (Tab Content) -->
+                    <div id="founder-edit-container" class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-yellow-500 mb-6 hidden">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Edit Founder Profile</h3>
+                        
+                        <!-- Founder Profile Preview (Visible in Admin Dashboard) -->
+                        <div class="bg-gray-50 p-4 rounded-lg shadow-inner mb-4 flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div id="admin-founder-image" class="w-16 h-16 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+                                    <!-- Image or placeholder will be rendered here by JavaScript -->
+                                </div>
+                            </div>
+                            <div>
+                                <p id="admin-founder-name" class="text-sm font-semibold text-red-600">Founder Name</p>
+                                <p id="admin-founder-title" class="text-xs text-gray-500">Founder Title</p>
+                            </div>
+                        </div>
+
+                        <!-- Founder Data Edit Form -->
+                        <form id="founder-edit-form" class="space-y-3">
+                            <div class="space-y-1">
+                                <label for="founder-name-input" class="block text-sm font-medium text-gray-700">Name</label>
+                                <input type="text" id="founder-name-input" required class="w-full px-3 py-2 border rounded-lg text-gray-900">
+                            </div>
+                            <div class="space-y-1">
+                                <label for="founder-title-input" class="block text-sm font-medium text-gray-700">Title / Qualifications</label>
+                                <input type="text" id="founder-title-input" required class="w-full px-3 py-2 border rounded-lg text-gray-900">
+                            </div>
+                            <div class="space-y-1">
+                                <label for="founder-bio-input" class="block text-sm font-medium text-gray-700">Biography</label>
+                                <textarea id="founder-bio-input" rows="3" required class="w-full px-3 py-2 border rounded-lg text-gray-900"></textarea>
+                            </div>
+                            <div class="space-y-1">
+                                <label for="founder-image-input" class="block text-sm font-medium text-gray-700">Image URL (Upload photo to a public host and paste link here)</label>
+                                <input type="url" id="founder-image-input" placeholder="e.g., https://your-site.com/image.jpg" class="w-full px-3 py-2 border rounded-lg text-gray-900">
+                            </div>
+                            <button type="submit" id="save-founder-button" class="w-full mt-4 bg-red-600 text-white py-2 rounded-xl font-bold hover:bg-yellow-400 transition duration-300">
+                                Save Changes & Update Live Site
+                            </button>
+                            <p id="founder-status" class="text-center text-sm font-bold mt-2" style="min-height: 20px;"></p>
+                        </form>
+                    </div>
+                
+                    <!-- Inquiry List Container (Tab Content) -->
+                    <div id="inquiry-list-container">
+                        
+                        <!-- NEW: Status Bar for Leads Management --><p id="admin-status" class="text-center text-sm font-bold mt-4 mb-4" style="min-height: 20px;"></p>
+
+                        <p class="text-xl font-bold text-gray-700 mb-4 flex justify-between items-center">
+                            Live Student Inquiries
+                            <span id="inquiry-count" class="text-sm text-gray-500">0 inquiries loaded</span>
+                        </p>
+                        
+                        <!-- New Global Action Buttons -->
+                        <div class="mb-4 flex space-x-3">
+                            <button onclick="window.copyAllInquiries()" class="px-4 py-2 bg-green-500 text-white font-bold rounded-lg shadow-md hover:bg-green-600 transition duration-300 text-sm">
+                                Copy All Data
+                            </button>
+                            <!-- DOUBLE-CLICK FOR SAFETY CHECK on Delete All -->
+                            <button onclick="this.textContent='Double Click to CONFIRM DELETE';" ondblclick="window.deleteAllInquiries()" class="px-4 py-2 bg-red-600 text-white font-bold rounded-lg shadow-md hover:bg-red-700 transition duration-300 text-sm">
+                                Delete All Inquiries
+                            </button>
+                        </div>
+
+                        <p id="loading-message" class="text-lg text-gray-500 mb-4">Loading inquiries...</p>
+                        <div id="inquiries-list" class="space-y-4">
+                            <!-- Inquiry cards will be injected here by JavaScript -->
+                        </div>
+                        <p id="no-inquiries" class="text-lg text-gray-500 mt-4 hidden">No student inquiries found yet.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END ADMIN DASHBOARD OVERLAY -->
+    
+    <!-- START OF BACKEND / FIRESTORE JAVASCRIPT LOGIC -->
+    <script type="module">
+        // --- CONSTANTS & CONFIG ---
+        // Secret shared passcode for admin access. You and your partner must know this!
+        const ADMIN_PASSCODE = 'Nawabbrother3'; 
+        // Firestore collection name for student leads
+        const PUBLIC_COLLECTION_NAME = 'visa-inquiries';
+        // Firestore collection and document ID for the single, editable founder profile
+        const FOUNDER_COLLECTION = 'founder_details';
+        const FOUNDER_DOC_ID = 'profile_data';
+
+        // 1. IMPORT NECESSARY FIREBASE MODULES
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        // Imports for CRUD operations and real-time listening
+        import { getFirestore, collection, addDoc, onSnapshot, setLogLevel, getDocs, deleteDoc, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Set log level to Debug to see detailed console logs for Firebase activity
+        setLogLevel('Debug');
+
+        // 2. RETRIEVE ENVIRONMENT VARIABLES (Injected by the platform)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null; 
+
+        let db, auth; 
+        let currentInquiries = []; // Array to hold live inquiry objects from Firestore
+        let isAuthenticated = false; // Flag to track successful admin login
+        let clickCounter = 0; // Counter for the secret logo triple-click
+        
+        // --- DEFAULT FOUNDER DATA (Used if database document is empty) ---
+        const DEFAULT_FOUNDER_DATA = {
+            name: "Arsalan Khan",
+            title: "Lead German Visa Consultant (M.A., Heidelberg University)",
+            bio: "Arsalan is the driving force behind StudyWise Germany. Having successfully completed his Master's degree in Germany, he intimately understands the challenges of the blocked account setup, visa application complexity, and integrating into a new academic environment. His mission is to use his firsthand experience to streamline your entire process, ensuring zero errors and maximum confidence from application to enrollment.",
+            expertise: "**Expertise:** Visa Interview Prep, Blocked Account Setup, Uni-Assist Application Review.",
+            imageUrl: "" // Placeholder URL
+        };
+
+        /**
+         * Initializes Firebase app and handles user authentication (login).
+         */
+        async function initializeFirebase() {
+            try {
+                if (Object.keys(firebaseConfig).length === 0) {
+                     console.error("Firebase configuration not found. Cannot initialize Firestore.");
+                     return;
+                }
+                
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                // Keep authentication persistent across browser sessions
+                await setPersistence(auth, browserSessionPersistence);
+                
+                // Sign in as Admin if token exists, otherwise sign in anonymously (student user)
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+                
+                // Start listening to the founder profile immediately for the public view
+                setupFounderListener(true); 
+
+            } catch (error) {
+                console.error("Error during Firebase initialization or authentication:", error);
+            }
+        }
+
+        initializeFirebase();
+
+        // 3. GET REFERENCES TO HTML ELEMENTS
+        // Form elements
+        const contactForm = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const successMessage = document.getElementById('submission-success');
+        const errorMessage = document.getElementById('submission-error');
+        // Inquiry List elements
+        const inquiryList = document.getElementById('inquiries-list');
+        const loadingMessage = document.getElementById('loading-message');
+        const noInquiriesMessage = document.getElementById('no-inquiries');
+        const inquiryCountSpan = document.getElementById('inquiry-count');
+        
+        // ADMIN REFERENCES (Overlay and Access)
+        const siteLogo = document.getElementById('site-logo');
+        const adminOverlay = document.getElementById('admin-overlay');
+        const adminLoginArea = document.getElementById('admin-login-area');
+        const passcodeInput = document.getElementById('admin-passcode');
+        const accessButton = document.getElementById('access-button');
+        const passcodeError = document.getElementById('passcode-error');
+        const closeButton = document.getElementById('close-dashboard');
+        const listContainer = document.getElementById('inquiry-list-container');
+        const adminStatus = document.getElementById('admin-status'); 
+        const dashboardContentArea = document.getElementById('dashboard-content-area'); 
+
+        
+        // FOUNDER EDIT REFERENCES
+        const founderProfilePublic = document.getElementById('founder-profile'); // Public section ID
+        const founderEditContainer = document.getElementById('founder-edit-container'); // Admin edit section ID
+        const founderEditForm = document.getElementById('founder-edit-form');
+        const founderNameInput = document.getElementById('founder-name-input');
+        const founderTitleInput = document.getElementById('founder-title-input');
+        const founderBioInput = document.getElementById('founder-bio-input');
+        const founderImageInput = document.getElementById('founder-image-input');
+        const saveFounderButton = document.getElementById('save-founder-button');
+        const founderStatus = document.getElementById('founder-status'); // Status for founder edit form
+
+        // TAB REFERENCES
+        const tabInquiries = document.getElementById('tab-inquiries');
+        const tabFounder = document.getElementById('tab-founder');
+        
+        // --- UTILITY FUNCTIONS ---
+        
+        /**
+         * Switches the active content view within the Admin Dashboard (Inquiries or Founder Edit).
+         */
+        function switchAdminView(view) {
+            // Hide all content containers initially
+            founderEditContainer.classList.add('hidden');
+            listContainer.classList.add('hidden');
+            
+            // Reset all tab styling to default (unselected)
+            tabInquiries.classList.remove('text-red-600', 'border-red-600', 'bg-white');
+            tabInquiries.classList.add('text-gray-600', 'border-transparent');
+            tabFounder.classList.remove('text-red-600', 'border-red-600', 'bg-white');
+            tabFounder.classList.add('text-gray-600', 'border-transparent');
+
+            // Apply selected view logic
+            if (view === 'inquiries') {
+                listContainer.classList.remove('hidden');
+                tabInquiries.classList.add('text-red-600', 'border-red-600', 'bg-white');
+            } else if (view === 'founder') {
+                founderEditContainer.classList.remove('hidden');
+                tabFounder.classList.add('text-red-600', 'border-red-600', 'bg-white');
+            }
+        }
+        window.switchAdminView = switchAdminView; // Expose to HTML for tab buttons
+
+        // --- FOUNDER PROFILE LOGIC (Real-Time Update for Public Site) ---
+
+        /**
+         * Renders the founder profile HTML for the public view and the admin preview.
+         * @param {Object} data - Founder profile data from Firestore.
+         */
+        function renderFounderProfile(data) {
+            // Use current data or default data if missing
+            const profile = data || DEFAULT_FOUNDER_DATA;
+            
+            let imageHtml;
+            const sizeClasses = "w-32 h-32 rounded-full object-cover"; // Shared sizing for public view
+            const adminSizeClasses = "w-16 h-16 rounded-full object-cover"; // Smaller sizing for admin preview
+
+            if (profile.imageUrl && profile.imageUrl !== "") {
+                // Use the provided image URL if available
+                imageHtml = `<img src="${profile.imageUrl}" alt="Founder Photo" class="${sizeClasses}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,...'">`; 
+            } else {
+                // Use default placeholder SVG if no URL is provided
+                imageHtml = `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-16 h-16 text-white">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 16.895A2.25 2.25 0 0 1 5.437 15h13.126c1.17 0 2.18.749 2.564 1.895a2.25 2.25 0 0 1-.864 2.18c-.282.164-.593.284-.916.353v.524A2.25 2.25 0 0 1 18 21h-1.5a.75.75 0 0 0 0 1.5h-9a.75.75 0 0 0 0-1.5H6a2.25 2.25 0 0 1-2.25-2.25v-.524a4.49 4.49 0 0 1-.916-.353 2.25 2.25 0 0 1-.864-2.18Z" clip-rule="evenodd" />
+                            </svg>`;
+            }
+            
+            // 1. Build and insert the HTML for the PUBLIC FACING section
+            founderProfilePublic.innerHTML = `
+                <div class="flex-shrink-0">
+                    <div class="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
+                        ${imageHtml}
+                    </div>
+                </div>
+                <div class="flex-grow text-center md:text-left">
+                    <h3 class="text-2xl font-bold text-red-600">${profile.name}</h3>
+                    <p class="text-xl font-medium text-yellow-600 mb-3">${profile.title}</p>
+                    <p class="text-gray-700 mb-4">${profile.bio}</p>
+                    <p class="text-sm text-gray-500">${profile.expertise}</p>
+                </div>
+            `;
+
+            // 2. Update the ADMIN DASHBOARD preview (smaller version)
+            const adminFounderImageDiv = document.getElementById('admin-founder-image');
+            // Re-generate imageHtml for the admin preview with correct size classes if it's an image
+            let adminImageHtml = imageHtml;
+            if (profile.imageUrl && profile.imageUrl !== "") {
+                adminImageHtml = `<img src="${profile.imageUrl}" alt="Founder Photo" class="${adminSizeClasses}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,...'">`; 
+            } else {
+                // Keep the default placeholder SVG for the admin preview as well
+                adminImageHtml = `<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="w-10 h-10 text-white">
+                                <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 16.895A2.25 2.25 0 0 1 5.437 15h13.126c1.17 0 2.18.749 2.564 1.895a2.25 2.25 0 0 1-.864 2.18c-.282.164-.593.284-.916.353v.524A2.25 2.25 0 0 1 18 21h-1.5a.75.75 0 0 0 0 1.5h-9a.75.75 0 0 0 0-1.5H6a2.25 2.25 0 0 1-2.25-2.25v-.524a4.49 4.49 0 0 1-.916-.353 2.25 2.25 0 0 1-.864-2.18Z" clip-rule="evenodd" />
+                            </svg>`;
+            }
+            adminFounderImageDiv.innerHTML = adminImageHtml;
+            document.getElementById('admin-founder-name').textContent = profile.name;
+            document.getElementById('admin-founder-title').textContent = profile.title;
+        }
+
+        /**
+         * Real-time listener for the founder profile document.
+         */
+        function setupFounderListener(isPublicInit = false) {
+            if (!db) return;
+            const docRef = doc(db, `artifacts/${appId}/public/data/${FOUNDER_COLLECTION}`, FOUNDER_DOC_ID);
+            
+            onSnapshot(docRef, (docSnap) => {
+                let data = null;
+                if (docSnap.exists()) {
+                    data = docSnap.data();
+                } 
+
+                if (isPublicInit) {
+                    // Public initialization: If DB is empty, set default and render.
+                    if (!data) {
+                        saveFounderDataToFirestore(DEFAULT_FOUNDER_DATA, false); 
+                        renderFounderProfile(DEFAULT_FOUNDER_DATA);
+                    } else {
+                        renderFounderProfile(data);
+                    }
+                } else if (isAuthenticated) {
+                    // Admin initialization: Update form fields and render public view.
+                    updateFounderEditForm(data || DEFAULT_FOUNDER_DATA);
+                    renderFounderProfile(data); 
+                } else {
+                    // Public update after initial load
+                    renderFounderProfile(data);
+                }
+            }, (error) => {
+                console.error("Error listening to founder profile:", error);
+            });
+        }
+
+        /**
+         * Fills the Admin Edit form with current data from Firestore.
+         */
+        function updateFounderEditForm(data) {
+            founderNameInput.value = data.name || '';
+            founderTitleInput.value = data.title || '';
+            founderBioInput.value = data.bio || '';
+            founderImageInput.value = data.imageUrl || '';
+        }
+        
+        /**
+         * Saves founder data to the dedicated Firestore document.
+         */
+        async function saveFounderDataToFirestore(data, showStatus = true) {
+            if (!db) return showFounderStatus("Database not ready.", true);
+            
+            try {
+                const docRef = doc(db, `artifacts/${appId}/public/data/${FOUNDER_COLLECTION}`, FOUNDER_DOC_ID);
+                await setDoc(docRef, data);
+                if (showStatus) {
+                    founderStatus.textContent = "Profile updated successfully! Live site reflects changes.";
+                    founderStatus.style.color = '#16a34a';
+                    setTimeout(() => founderStatus.textContent = '', 3000);
+                }
+            } catch (error) {
+                console.error("Error saving founder data:", error);
+                founderStatus.textContent = "Error saving profile. Check console.";
+                founderStatus.style.color = '#dc2626';
+            } finally {
+                saveFounderButton.textContent = "Save Changes & Update Live Site";
+                saveFounderButton.disabled = false;
+            }
+        }
+
+        // --- ADMIN DASHBOARD UTILITY FUNCTIONS ---
+
+        /**
+         * Shows a temporary status message in the founder edit section.
+         */
+        function showFounderStatus(message, isError = false) {
+            founderStatus.textContent = message;
+            founderStatus.style.color = isError ? '#dc2626' : '#16a34a'; 
+            setTimeout(() => {
+                founderStatus.textContent = '';
+            }, 3000);
+        }
+        
+        // --- EVENT LISTENERS ---
+
+        founderEditForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            saveFounderButton.textContent = "Saving...";
+            saveFounderButton.disabled = true;
+            
+            const updatedData = {
+                name: founderNameInput.value,
+                title: founderTitleInput.value,
+                bio: founderBioInput.value,
+                // Expertise is not editable via this form for simplicity, kept hardcoded in JS default
+                expertise: DEFAULT_FOUNDER_DATA.expertise, 
+                imageUrl: founderImageInput.value.trim() // Trim whitespace from URL
+            };
+
+            await saveFounderDataToFirestore(updatedData);
+        });
+
+
+        // --- UTILITY FUNCTIONS FOR COPY AND DELETE ---
+        
+        /**
+         * Shows a temporary status message in the dashboard.
+         */
+        function showAdminStatus(message, isError = false) {
+            adminStatus.textContent = message;
+            adminStatus.style.color = isError ? '#dc2626' : '#16a34a'; // Red or Green
+            setTimeout(() => {
+                adminStatus.textContent = '';
+            }, 3000);
+        }
+
+        /**
+         * COPIES THE GIVEN TEXT TO THE CLIPBOARD (using robust fallback method).
+         */
+        async function copyToClipboard(text) {
+            try {
+                // 1. Try modern clipboard API
+                await navigator.clipboard.writeText(text);
+                showAdminStatus('Data copied to clipboard!');
+            } catch (err) {
+                // 2. Use the document.execCommand('copy') fallback for secure environments
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed'; // Keep it off-screen
+                textarea.style.left = '-9999px';
+                document.body.appendChild(textarea);
+                textarea.select();
+                try {
+                    document.execCommand('copy');
+                    showAdminStatus('Data copied to clipboard!');
+                } catch (execErr) {
+                    console.error('Copy fallback failed:', execErr);
+                    showAdminStatus('Failed to copy data. Please check console.', true);
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+        }
+
+        /**
+         * Formats and copies a single inquiry's data.
+         */
+        window.copyInquiry = function(inquiryId) {
+            const inquiry = currentInquiries.find(i => i.id === inquiryId);
+            if (!inquiry) return showAdminStatus('Inquiry not found!', true);
+
+            const date = inquiry.timestamp && inquiry.timestamp.toMillis ? 
+                         new Date(inquiry.timestamp.toMillis()).toLocaleString() : 'N/A';
+
+            const text = `--- INQUIRY DETAILS ---\n` +
+                         `Name: ${inquiry.name}\n` +
+                         `Email: ${inquiry.email}\n` +
+                         `Phone: ${inquiry.phone || 'N/A'}\n` +
+                         `Interest: ${inquiry.interest}\n` +
+                         `Date: ${date}\n` +
+                         `Message: ${inquiry.message || 'No message provided.'}\n` +
+                         `-------------------------`;
+            copyToClipboard(text);
+        }
+
+        /**
+         * Formats and copies all visible inquiries.
+         */
+        window.copyAllInquiries = function() {
+            if (currentInquiries.length === 0) {
+                return showAdminStatus("No inquiries to copy.", true);
+            }
+
+            let allText = `STUDYWSE GERMANY - ALL INQUIRIES (${currentInquiries.length})\n\n`;
+            currentInquiries.forEach((inquiry, index) => {
+                const date = inquiry.timestamp && inquiry.timestamp.toMillis ? 
+                             new Date(inquiry.timestamp.toMillis()).toLocaleString() : 'N/A';
+                
+                allText += `--- INQUIRY #${index + 1} ---\n`;
+                allText += `Name: ${inquiry.name}\n`;
+                allText += `Email: ${inquiry.email}\n`;
+                allText += `Phone: ${inquiry.phone || 'N/A'}\n`;
+                allText += `Interest: ${inquiry.interest}\n`;
+                allText += `Date: ${date}\n`;
+                allText += `Message: ${inquiry.message || 'No message provided.'}\n`;
+                allText += `--------------------------------------------------\n\n`;
+            });
+            copyToClipboard(allText);
+        }
+
+        /**
+         * Deletes a single document from Firestore.
+         */
+        window.deleteInquiry = async function(docId) {
+            // No confirmation prompt due to platform constraints, reliance on the button being clicked intentionally
+            if (!db || !auth || !auth.currentUser) return showAdminStatus("Database not ready for delete.", true);
+
+            try {
+                const docRef = doc(db, `artifacts/${appId}/public/data/${PUBLIC_COLLECTION_NAME}`, docId);
+                await deleteDoc(docRef);
+                showAdminStatus(`Inquiry deleted.`, false);
+            } catch (error) {
+                console.error("Error deleting document:", error);
+                showAdminStatus("Failed to delete inquiry. Check console.", true);
+            }
+        }
+
+        /**
+         * Deletes ALL documents from the collection (Requires double-click safety check).
+         */
+        window.deleteAllInquiries = async function() {
+            const inquiryCount = currentInquiries.length;
+            if (inquiryCount === 0) return showAdminStatus("No inquiries to delete.", true);
+            
+            // Revert button text immediately after double-click
+            const deleteAllButton = document.querySelector('[ondblclick="window.deleteAllInquiries()"]');
+            deleteAllButton.textContent = 'Delete All Inquiries';
+            
+            // No confirmation prompt, rely on double-click safety
+            if (!db || !auth || !auth.currentUser) return showAdminStatus("Database not ready for delete.", true);
+
+            try {
+                const collectionRef = collection(db, `artifacts/${appId}/public/data/${PUBLIC_COLLECTION_NAME}`);
+                const snapshot = await getDocs(collectionRef);
+                
+                let deletedCount = 0;
+                for (const docSnapshot of snapshot.docs) {
+                    await deleteDoc(doc(db, collectionRef.path, docSnapshot.id));
+                    deletedCount++;
+                }
+                showAdminStatus(`${deletedCount} inquiries permanently deleted.`, false);
+            } catch (error) {
+                console.error("Error deleting all inquiries:", error);
+                showAdminStatus("Failed to delete all inquiries. Check console.", true);
+            }
+        }
+
+        // --- SECRET ACCESS LOGIC (Triple-Click on Logo) ---
+        siteLogo.addEventListener('click', (e) => {
+            e.preventDefault(); 
+            clickCounter++;
+            
+            if(adminOverlay.style.display === 'flex' && clickCounter === 1) {
+                adminOverlay.style.display = 'none';
+                clickCounter = 0;
+                return;
+            }
+
+            if (clickCounter === 3) {
+                adminOverlay.style.display = 'flex';
+                clickCounter = 0; 
+                adminLoginArea.classList.remove('hidden');
+                dashboardContentArea.classList.add('hidden'); // Hide content initially
+            }
+
+            setTimeout(() => {
+                clickCounter = 0;
+            }, 500);
+        });
+
+        // Close button functionality
+        closeButton.addEventListener('click', () => {
+            adminOverlay.style.display = 'none';
+        });
+
+        // --- DASHBOARD DATA & ACCESS LOGIC ---
+
+        /**
+         * Attaches the real-time listener to the shared collection
+         */
+        function setupInquiryListener() {
+            const collectionPath = `artifacts/${appId}/public/data/${PUBLIC_COLLECTION_NAME}`;
+
+            onSnapshot(collection(db, collectionPath), (snapshot) => {
+                const inquiries = [];
+                snapshot.forEach(doc => {
+                    // Store the document ID with the data (CRITICAL for delete/copy)
+                    inquiries.push({ id: doc.id, ...doc.data() }); 
+                });
+                renderInquiries(inquiries); 
+            }, (error) => {
+                console.error("Error listening to inquiries:", error);
+                loadingMessage.textContent = "Error loading data. Check console.";
+            });
+        }
+        
+        // Handle passcode submission via button click or Enter
+        accessButton.addEventListener('click', handlePasscodeAccess);
+        passcodeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handlePasscodeAccess(e);
+            }
+        });
+
+        /**
+         * Checks the entered passcode against the hardcoded secret.
+         */
+        function handlePasscodeAccess(event) {
+            event.preventDefault();
+            passcodeError.classList.add('hidden');
+
+            if (passcodeInput.value === ADMIN_PASSCODE) {
+                isAuthenticated = true;
+                adminLoginArea.classList.add('hidden'); // Hide login box
+                
+                setupInquiryListener(); // Start fetching leads
+                setupFounderListener(false); // Fetch current founder data for edit form
+                
+                dashboardContentArea.classList.remove('hidden'); // Show content area
+                switchAdminView('inquiries'); // Default to inquiries view
+
+            } else {
+                passcodeError.classList.remove('hidden');
+                passcodeInput.value = ''; // Clear input
+            }
+        }
+        
+        /**
+         * Renders the list of inquiries onto the admin dashboard.
+         */
+        function renderInquiries(inquiries) {
+            currentInquiries = inquiries;
+            inquiryList.innerHTML = '';
+            loadingMessage.classList.add('hidden');
+            inquiryCountSpan.textContent = `${inquiries.length} inquiries loaded`;
+
+            if (inquiries.length === 0) {
+                noInquiriesMessage.classList.remove('hidden');
+                return;
+            }
+
+            noInquiriesMessage.classList.add('hidden');
+            inquiries.sort((a, b) => (b.timestamp?.toMillis() || 0) - (a.timestamp?.toMillis() || 0));
+
+            inquiries.forEach(inquiry => {
+                const date = inquiry.timestamp && inquiry.timestamp.toMillis ? 
+                             new Date(inquiry.timestamp.toMillis()).toLocaleString() : 'N/A';
+                
+                const card = document.createElement('div');
+                card.className = 'bg-white p-5 rounded-lg shadow-md border-l-4 border-red-600'; 
+                card.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <p class="text-xs text-gray-500">${date}</p>
+                            <h4 class="text-xl font-bold text-red-600">${inquiry.name} <span class="text-sm font-normal text-gray-500">(${inquiry.email})</span></h4>
+                            <p class="font-medium text-gray-700 mt-1">Interest: ${inquiry.interest}</p>
+                        </div>
+                        <div class="space-x-2">
+                            <button onclick="window.copyInquiry('${inquiry.id}')" class="px-3 py-1 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition duration-150 text-xs font-medium">Copy Data</button>
+                            <button onclick="window.deleteInquiry('${inquiry.id}')" class="px-3 py-1 bg-red-100 text-red-600 rounded-lg hover:bg-red-200 transition duration-150 text-xs font-medium">Delete</button>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mt-2">Message: ${inquiry.message || 'No message provided.'}</p>
+                    ${inquiry.phone ? `<p class="text-sm text-gray-500">Phone: ${inquiry.phone}</p>` : ''}
+                    <!-- NEW: Qualification field added for context -->
+                    <p class="text-sm text-gray-500 mt-1">Qualification: ${inquiry.qualification || 'Not specified'}</p>
+                `;
+                inquiryList.appendChild(card);
+            });
+        }
+
+        
+        // --- FORM SUBMISSION LOGIC ---
+
+        contactForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            submitButton.textContent = 'Submitting...';
+            submitButton.disabled = true;
+
+            if (!db || !auth || !auth.currentUser) {
+                console.error("Firestore or User not ready. Data save aborted.");
+                errorMessage.textContent = "Database connection error. Please try again later.";
+                errorMessage.classList.remove('hidden');
+                submitButton.textContent = 'Request Consultation';
+                submitButton.disabled = false;
+                return;
+            }
+
+            const formData = new FormData(contactForm);
+            const inquiryData = {
+                // NEW: Qualification Field added to data object
+                qualification: formData.get('qualification'),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                interest: formData.get('interest'),
+                message: formData.get('message'),
+                timestamp: new Date(), 
+                userId: auth.currentUser.uid, 
+            };
+
+            // Defines the path to the shared public collection
+            const collectionPath = `artifacts/${appId}/public/data/${PUBLIC_COLLECTION_NAME}`;
+
+            try {
+                // Saves the new document to Firestore
+                const docRef = await addDoc(collection(db, collectionPath), inquiryData);
+                console.log("Document successfully written to shared collection with ID: ", docRef.id);
+
+                contactForm.reset(); 
+                successMessage.classList.remove('hidden');
+                
+            } catch (e) {
+                console.error("Error adding document:", e);
+                errorMessage.textContent = `Error: Could not save data. Check console for details.`;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                submitButton.textContent = 'Request Consultation';
+                submitButton.disabled = false;
+            }
+        });
+    </script>
+    <!-- END OF BACKEND / FIRESTORE JAVASCRIPT LOGIC -->
+</body>
+</html>
