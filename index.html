@@ -620,20 +620,23 @@
         // 3. INITIALIZE FIREBASE APP & SERVICES
         let db, auth, app; 
         
-        // Initialize the core Firebase App instance
+        // Initialize the core Firebase App instance immediately
         try {
             if (firebaseConfig.apiKey && firebaseConfig.projectId) {
                 app = initializeApp(firebaseConfig);
+                // Initialize services now that the app is ready
+                db = getFirestore(app);
+                auth = getAuth(app);
             } else {
-                console.error("Firebase config missing. Aborting initialization.");
+                console.error("Firebase configuration missing. Aborting initialization.");
             }
         } catch (error) {
-            console.error("Error during App initialization:", error);
+            console.error("Error during Firebase initialization:", error);
         }
 
-        let currentInquiries = []; // Array to hold live inquiry objects from Firestore
-        let isAuthenticated = false; // Flag to track successful admin login
-        let clickCounter = 0; // Counter for the secret logo triple-click
+        let currentInquiries = []; 
+        let isAuthenticated = false; 
+        let clickCounter = 0; 
         
         // --- DEFAULT FOUNDER DATA (Used if database document is empty) ---
         const DEFAULT_FOUNDER_DATA = {
@@ -648,21 +651,16 @@
          * Runs authentication after app initialization
          */
         async function runAuth() {
-            // Check if the core app was successfully initialized
-             if (!app) return; 
-
-            // Initialize services now that the app is ready
+            // Check if services were successfully initialized (fixes the auth/configuration-not-found issue)
+             if (!auth) return; 
+             
             try {
-                db = getFirestore(app);
-                auth = getAuth(app);
-
-                // --- FIX FOR LOCAL TESTING ---
-                // Check if running locally (file:// protocol)
+                // --- FIX FOR LOCAL TESTING: Disable persistence if running locally ---
                 const isLocal = window.location.protocol === 'file:';
                 const persistence = isLocal ? null : browserSessionPersistence;
                 
-                // If local, set persistence to null (temporary) to bypass security errors
                 if (persistence === null) {
+                    // Use null persistence for local file running to bypass security restrictions
                     await setPersistence(auth, null);
                 } else {
                     await setPersistence(auth, persistence);
@@ -678,12 +676,12 @@
             } catch (error) {
                 console.error("Error during Firebase authentication:", error);
                 // Display error on the form for user feedback
-                document.getElementById('submission-error').textContent = "Connection Error: Please check deployment status or network.";
+                document.getElementById('submission-error').textContent = "Connection Error: Please ensure Firebase Rules are PUBLISHED.";
                 document.getElementById('submission-error').classList.remove('hidden');
             }
         }
 
-        // Run Initialization and Authentication after the DOM loads
+        // Run Initialization and Authentication immediately
         if (app) {
             runAuth();
         }
