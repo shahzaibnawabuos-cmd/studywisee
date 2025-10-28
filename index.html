@@ -592,9 +592,9 @@
 
         // 1. IMPORT NECESSARY FIREBASE MODULES
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         // Imports for CRUD operations and real-time listening
-        import { getFirestore, collection, addDoc, onSnapshot, setLogLevel, getDocs, deleteDoc, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, addDoc, onSnapshot, setLogLevel, getDocs, deleteDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Set log level to Debug to see detailed console logs for Firebase activity
         setLogLevel('Debug');
@@ -612,25 +612,23 @@
             storageBucket: "studywise-c15db.firebasestorage.app",
             messagingSenderId: "20912644419",
             appId: "1:20912644419:web:ced790acd4de6ab82a0ff6",
-            measurementId: "G-3E8QQNH005" // This value is actually for Google Analytics (GA4), but we'll include it here
+            measurementId: "G-3E8QQNH005" 
         };
         
-        // The authentication token is still null/ignored for public deployment, relying on sign in anonymously
         const initialAuthToken = null; 
 
-        // 3. INITIALIZE FIREBASE APP IMMEDIATELY (Fix for auth/configuration-not-found)
+        // 3. INITIALIZE FIREBASE APP & SERVICES
         let db, auth, app; 
+        
+        // Initialize the core Firebase App instance
         try {
-             // Check if the hardcoded configuration is present
-            if (firebaseConfig.apiKey) {
+            if (firebaseConfig.apiKey && firebaseConfig.projectId) {
                 app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
             } else {
-                console.error("Firebase configuration is incomplete. Cannot initialize Firestore.");
+                console.error("Firebase config missing. Aborting initialization.");
             }
         } catch (error) {
-            console.error("Error during Firebase initialization:", error);
+            console.error("Error during App initialization:", error);
         }
 
         let currentInquiries = []; // Array to hold live inquiry objects from Firestore
@@ -650,27 +648,45 @@
          * Runs authentication after app initialization
          */
         async function runAuth() {
-             if (!auth) return;
+            // Check if the core app was successfully initialized
+             if (!app) return; 
+
+            // Initialize services now that the app is ready
             try {
-                // Keep authentication persistent across browser sessions
-                await setPersistence(auth, browserSessionPersistence);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // --- FIX FOR LOCAL TESTING ---
+                // Check if running locally (file:// protocol)
+                const isLocal = window.location.protocol === 'file:';
+                const persistence = isLocal ? null : browserSessionPersistence;
                 
-                // Sign in as Admin if token exists (will be null), otherwise sign in anonymously (student user)
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
+                // If local, set persistence to null (temporary) to bypass security errors
+                if (persistence === null) {
+                    await setPersistence(auth, null);
                 } else {
-                    await signInAnonymously(auth); // Public user signs in anonymously
+                    await setPersistence(auth, persistence);
                 }
+                // -----------------------------
+
+                // Sign in anonymously for public users (the default)
+                await signInAnonymously(auth);
                 
                 // Start listening to the founder profile immediately for the public view
                 setupFounderListener(true); 
 
             } catch (error) {
                 console.error("Error during Firebase authentication:", error);
+                // Display error on the form for user feedback
+                document.getElementById('submission-error').textContent = "Connection Error: Please check deployment status or network.";
+                document.getElementById('submission-error').classList.remove('hidden');
             }
         }
 
-        runAuth();
+        // Run Initialization and Authentication after the DOM loads
+        if (app) {
+            runAuth();
+        }
 
 
         // 3. GET REFERENCES TO HTML ELEMENTS
